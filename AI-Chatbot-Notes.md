@@ -1,3 +1,5 @@
 * The `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`:
   * These are tied to an [IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (ie a person). In production, this chatbot code should use an IAM Role that has the appropriate permissions to use the Bedrock service.
   * If these keys are going to be used, they shouldn't be written in plaintext. They should be stored in a secrets manager such as [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) or a Dockerfile/.env file or some other way that doesn't commit them to source control.
+* The `while` loop is funny but maybe it's written this way for the sake of the exercise. In production, I wouldn't expect this chatbot code to directly except user input, run in a `while True` loop, or have the program quit when the user types "quit". There a lots of ways to implement this better but since this is code is running in AWS, a [Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) would be appropriate. The chatbot code would only run when a request is sent to the Lambda function containing the user input.
+* 

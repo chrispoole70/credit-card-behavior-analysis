@@ -14,3 +14,5 @@
   * Right now there's no system message with instructions for the LLM (ie "you are to answer questions about the content of this page...")
   * The RAG piece is missing- you also need to send the page content this LLM is supposed to answer questions about.
   * The model `anthropic.claude-v2` is outdated (latest version is 4). This should be configurable such as making it an [environment variable in the Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
+  * The LLM temperature might be too high for answering factual questions about specific content. Setting it closer to zero would be my suggestion.
+  * `max_tokens` to generate an answer might be too limiting. A short paragraph is about 500 tokens. My suggestion is to give the LLM instructions and examples of what you want the output to be instead of relying on the maximum number of tokens it can generate. By giving the LLM examples you improve it's accuracy and by stating the output format (ie "generate 3 sentences" or use a [structured output](https://python.langchain.com/docs/concepts/structured_outputs/) you have more control over the answer it generates.
